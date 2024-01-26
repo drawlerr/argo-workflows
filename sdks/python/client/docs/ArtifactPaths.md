@@ -1,0 +1,51 @@
+# ArtifactPaths
+
+ArtifactPaths expands a step from a collection of artifacts
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**archive** | [**ArchiveStrategy**](ArchiveStrategy.md) |  | [optional] 
+**archive_logs** | **bool** | ArchiveLogs indicates if the container logs should be archived | [optional] 
+**artifact_gc** | [**ArtifactGC**](ArtifactGC.md) |  | [optional] 
+**artifactory** | [**ArtifactoryArtifact**](ArtifactoryArtifact.md) |  | [optional] 
+**azure** | [**AzureArtifact**](AzureArtifact.md) |  | [optional] 
+**deleted** | **bool** | Has this been deleted? | [optional] 
+**var_from** | **str** | From allows an artifact to reference an artifact from a previous step | [optional] 
+**from_expression** | **str** | FromExpression, if defined, is evaluated to specify the value for the artifact | [optional] 
+**gcs** | [**GCSArtifact**](GCSArtifact.md) |  | [optional] 
+**git** | [**GitArtifact**](GitArtifact.md) |  | [optional] 
+**global_name** | **str** | GlobalName exports an output artifact to the global scope, making it available as &#39;{{outputs.artifacts.XXXX}} and in workflow.status.outputs.artifacts | [optional] 
+**hdfs** | [**HDFSArtifact**](HDFSArtifact.md) |  | [optional] 
+**http** | [**HTTPArtifact**](HTTPArtifact.md) |  | [optional] 
+**mode** | **int** | mode bits to use on this file, must be a value between 0 and 0777 set when loading input artifacts. | [optional] 
+**name** | **str** | name of the artifact. must be unique within a template&#39;s inputs/outputs. | 
+**optional** | **bool** | Make Artifacts optional, if Artifacts doesn&#39;t generate or exist | [optional] 
+**oss** | [**OSSArtifact**](OSSArtifact.md) |  | [optional] 
+**path** | **str** | Path is the container path to the artifact | [optional] 
+**raw** | [**RawArtifact**](RawArtifact.md) |  | [optional] 
+**recurse_mode** | **bool** | If mode is set, apply the permission recursively into the artifact if it is a folder | [optional] 
+**s3** | [**S3Artifact**](S3Artifact.md) |  | [optional] 
+**sub_path** | **str** | SubPath allows an artifact to be sourced from a subpath within the specified source | [optional] 
+
+## Example
+
+```python
+from argo_workflows.models.artifact_paths import ArtifactPaths
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ArtifactPaths from a JSON string
+artifact_paths_instance = ArtifactPaths.from_json(json)
+# print the JSON string representation of the object
+print ArtifactPaths.to_json()
+
+# convert the object into a dict
+artifact_paths_dict = artifact_paths_instance.to_dict()
+# create an instance of ArtifactPaths from a dict
+artifact_paths_form_dict = artifact_paths.from_dict(artifact_paths_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

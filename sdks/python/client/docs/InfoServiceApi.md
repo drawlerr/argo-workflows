@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **collect_event**
-> bool, date, datetime, dict, float, int, list, str, none_type collect_event(body)
+> object collect_event(body)
 
 
 
@@ -21,11 +21,12 @@ Method | HTTP request | Description
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import info_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
-from argo_workflows.model.io_argoproj_workflow_v1alpha1_collect_event_request import IoArgoprojWorkflowV1alpha1CollectEventRequest
+from argo_workflows.models.collect_event_request import CollectEventRequest
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -38,7 +39,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -46,29 +47,29 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = info_service_api.InfoServiceApi(api_client)
-    body = IoArgoprojWorkflowV1alpha1CollectEventRequest(
-        name="name_example",
-    ) # IoArgoprojWorkflowV1alpha1CollectEventRequest | 
+    api_instance = argo_workflows.InfoServiceApi(api_client)
+    body = argo_workflows.CollectEventRequest() # CollectEventRequest | 
 
-    # example passing only required values which don't have defaults set
     try:
         api_response = api_instance.collect_event(body)
+        print("The response of InfoServiceApi->collect_event:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling InfoServiceApi->collect_event: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**IoArgoprojWorkflowV1alpha1CollectEventRequest**](IoArgoprojWorkflowV1alpha1CollectEventRequest.md)|  |
+ **body** | [**CollectEventRequest**](CollectEventRequest.md)|  | 
 
 ### Return type
 
-**bool, date, datetime, dict, float, int, list, str, none_type**
+**object**
 
 ### Authorization
 
@@ -78,7 +79,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_info**
-> IoArgoprojWorkflowV1alpha1InfoResponse get_info()
+> InfoResponse get_info()
 
 
 
@@ -100,11 +100,12 @@ Name | Type | Description  | Notes
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import info_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
-from argo_workflows.model.io_argoproj_workflow_v1alpha1_info_response import IoArgoprojWorkflowV1alpha1InfoResponse
+from argo_workflows.models.info_response import InfoResponse
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -117,7 +118,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -125,23 +126,25 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = info_service_api.InfoServiceApi(api_client)
+    api_instance = argo_workflows.InfoServiceApi(api_client)
 
-    # example, this endpoint has no required or optional parameters
     try:
         api_response = api_instance.get_info()
+        print("The response of InfoServiceApi->get_info:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling InfoServiceApi->get_info: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**IoArgoprojWorkflowV1alpha1InfoResponse**](IoArgoprojWorkflowV1alpha1InfoResponse.md)
+[**InfoResponse**](InfoResponse.md)
 
 ### Authorization
 
@@ -151,7 +154,6 @@ This endpoint does not need any parameter.
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -163,7 +165,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_info**
-> IoArgoprojWorkflowV1alpha1GetUserInfoResponse get_user_info()
+> GetUserInfoResponse get_user_info()
 
 
 
@@ -173,11 +175,12 @@ This endpoint does not need any parameter.
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import info_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
-from argo_workflows.model.io_argoproj_workflow_v1alpha1_get_user_info_response import IoArgoprojWorkflowV1alpha1GetUserInfoResponse
+from argo_workflows.models.get_user_info_response import GetUserInfoResponse
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -190,7 +193,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -198,23 +201,25 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = info_service_api.InfoServiceApi(api_client)
+    api_instance = argo_workflows.InfoServiceApi(api_client)
 
-    # example, this endpoint has no required or optional parameters
     try:
         api_response = api_instance.get_user_info()
+        print("The response of InfoServiceApi->get_user_info:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling InfoServiceApi->get_user_info: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**IoArgoprojWorkflowV1alpha1GetUserInfoResponse**](IoArgoprojWorkflowV1alpha1GetUserInfoResponse.md)
+[**GetUserInfoResponse**](GetUserInfoResponse.md)
 
 ### Authorization
 
@@ -224,7 +229,6 @@ This endpoint does not need any parameter.
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -236,7 +240,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_version**
-> IoArgoprojWorkflowV1alpha1Version get_version()
+> Version get_version()
 
 
 
@@ -246,11 +250,12 @@ This endpoint does not need any parameter.
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import info_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
-from argo_workflows.model.io_argoproj_workflow_v1alpha1_version import IoArgoprojWorkflowV1alpha1Version
+from argo_workflows.models.version import Version
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -263,7 +268,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -271,23 +276,25 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = info_service_api.InfoServiceApi(api_client)
+    api_instance = argo_workflows.InfoServiceApi(api_client)
 
-    # example, this endpoint has no required or optional parameters
     try:
         api_response = api_instance.get_version()
+        print("The response of InfoServiceApi->get_version:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling InfoServiceApi->get_version: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**IoArgoprojWorkflowV1alpha1Version**](IoArgoprojWorkflowV1alpha1Version.md)
+[**Version**](Version.md)
 
 ### Authorization
 
@@ -297,7 +304,6 @@ This endpoint does not need any parameter.
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 

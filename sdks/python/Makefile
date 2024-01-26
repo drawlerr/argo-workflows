@@ -27,10 +27,13 @@ else
 	mkdir -p $(WD)
 	cat ../../api/openapi-spec/swagger.json | \
 		sed 's/io.k8s.api.core.v1.//' | \
-		sed 's/io.k8s.apimachinery.pkg.apis.meta.v1.//' \
+		sed 's/io.k8s.api.policy.v1.//' | \
+		sed 's/io.k8s.apimachinery.pkg.apis.meta.v1.//' | \
+		sed 's/io.argoproj.workflow.v1alpha1.//' | \
+		sed 's/io.argoproj.events.v1alpha1.//' \
 		> $(WD)/swagger.json
 	cp ../../LICENSE $(WD)/LICENSE
-	$(DOCKER) openapitools/openapi-generator-cli:v5.4.0 \
+	$(DOCKER) openapitools/openapi-generator-cli:v7.2.0 \
 		generate \
 		--input-spec /wd/swagger.json \
 		--generator-name python \
