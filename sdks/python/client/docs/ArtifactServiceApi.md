@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **get_artifact_file**
-> file_type get_artifact_file(namespace, id_discriminator, id, node_id, artifact_name, )
+> bytearray get_artifact_file(namespace, id_discriminator, id, node_id, artifact_name, artifact_discriminator)
 
 Get an artifact.
 
@@ -22,10 +22,11 @@ Get an artifact.
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import artifact_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -38,7 +39,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -46,37 +47,40 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = artifact_service_api.ArtifactServiceApi(api_client)
-    namespace = "namespace_example" # str | 
-    id_discriminator = "workflow" # str | 
-    id = "id_example" # str | 
-    node_id = "nodeId_example" # str | 
-    artifact_name = "artifactName_example" # str | 
+    api_instance = argo_workflows.ArtifactServiceApi(api_client)
+    namespace = 'namespace_example' # str | 
+    id_discriminator = 'id_discriminator_example' # str | 
+    id = 'id_example' # str | 
+    node_id = 'node_id_example' # str | 
+    artifact_name = 'artifact_name_example' # str | 
+    artifact_discriminator = 'artifact_discriminator_example' # str | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Get an artifact.
-        api_response = api_instance.get_artifact_file(namespace, id_discriminator, id, node_id, artifact_name, )
+        api_response = api_instance.get_artifact_file(namespace, id_discriminator, id, node_id, artifact_name, artifact_discriminator)
+        print("The response of ArtifactServiceApi->get_artifact_file:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling ArtifactServiceApi->get_artifact_file: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **namespace** | **str**|  |
- **id_discriminator** | **str**|  |
- **id** | **str**|  |
- **node_id** | **str**|  |
- **artifact_name** | **str**|  |
- **artifact_discriminator** | **str**|  | defaults to "outputs"
+ **namespace** | **str**|  | 
+ **id_discriminator** | **str**|  | 
+ **id** | **str**|  | 
+ **node_id** | **str**|  | 
+ **artifact_name** | **str**|  | 
+ **artifact_discriminator** | **str**|  | 
 
 ### Return type
 
-**file_type**
+**bytearray**
 
 ### Authorization
 
@@ -86,7 +90,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -98,7 +101,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_input_artifact**
-> file_type get_input_artifact(namespace, name, node_id, artifact_name)
+> bytearray get_input_artifact(namespace, name, node_id, artifact_name)
 
 Get an input artifact.
 
@@ -108,10 +111,11 @@ Get an input artifact.
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import artifact_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -124,7 +128,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -132,34 +136,36 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = artifact_service_api.ArtifactServiceApi(api_client)
-    namespace = "namespace_example" # str | 
-    name = "name_example" # str | 
-    node_id = "nodeId_example" # str | 
-    artifact_name = "artifactName_example" # str | 
+    api_instance = argo_workflows.ArtifactServiceApi(api_client)
+    namespace = 'namespace_example' # str | 
+    name = 'name_example' # str | 
+    node_id = 'node_id_example' # str | 
+    artifact_name = 'artifact_name_example' # str | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Get an input artifact.
         api_response = api_instance.get_input_artifact(namespace, name, node_id, artifact_name)
+        print("The response of ArtifactServiceApi->get_input_artifact:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling ArtifactServiceApi->get_input_artifact: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **namespace** | **str**|  |
- **name** | **str**|  |
- **node_id** | **str**|  |
- **artifact_name** | **str**|  |
+ **namespace** | **str**|  | 
+ **name** | **str**|  | 
+ **node_id** | **str**|  | 
+ **artifact_name** | **str**|  | 
 
 ### Return type
 
-**file_type**
+**bytearray**
 
 ### Authorization
 
@@ -169,7 +175,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -181,7 +186,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_input_artifact_by_uid**
-> file_type get_input_artifact_by_uid(uid, node_id, artifact_name)
+> bytearray get_input_artifact_by_uid(uid, node_id, artifact_name)
 
 Get an input artifact by UID.
 
@@ -191,10 +196,11 @@ Get an input artifact by UID.
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import artifact_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -207,7 +213,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -215,32 +221,34 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = artifact_service_api.ArtifactServiceApi(api_client)
-    uid = "uid_example" # str | 
-    node_id = "nodeId_example" # str | 
-    artifact_name = "artifactName_example" # str | 
+    api_instance = argo_workflows.ArtifactServiceApi(api_client)
+    uid = 'uid_example' # str | 
+    node_id = 'node_id_example' # str | 
+    artifact_name = 'artifact_name_example' # str | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Get an input artifact by UID.
         api_response = api_instance.get_input_artifact_by_uid(uid, node_id, artifact_name)
+        print("The response of ArtifactServiceApi->get_input_artifact_by_uid:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling ArtifactServiceApi->get_input_artifact_by_uid: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**|  |
- **node_id** | **str**|  |
- **artifact_name** | **str**|  |
+ **uid** | **str**|  | 
+ **node_id** | **str**|  | 
+ **artifact_name** | **str**|  | 
 
 ### Return type
 
-**file_type**
+**bytearray**
 
 ### Authorization
 
@@ -250,7 +258,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -262,7 +269,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_output_artifact**
-> file_type get_output_artifact(namespace, name, node_id, artifact_name)
+> bytearray get_output_artifact(namespace, name, node_id, artifact_name)
 
 Get an output artifact.
 
@@ -272,10 +279,11 @@ Get an output artifact.
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import artifact_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -288,7 +296,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -296,34 +304,36 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = artifact_service_api.ArtifactServiceApi(api_client)
-    namespace = "namespace_example" # str | 
-    name = "name_example" # str | 
-    node_id = "nodeId_example" # str | 
-    artifact_name = "artifactName_example" # str | 
+    api_instance = argo_workflows.ArtifactServiceApi(api_client)
+    namespace = 'namespace_example' # str | 
+    name = 'name_example' # str | 
+    node_id = 'node_id_example' # str | 
+    artifact_name = 'artifact_name_example' # str | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Get an output artifact.
         api_response = api_instance.get_output_artifact(namespace, name, node_id, artifact_name)
+        print("The response of ArtifactServiceApi->get_output_artifact:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling ArtifactServiceApi->get_output_artifact: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **namespace** | **str**|  |
- **name** | **str**|  |
- **node_id** | **str**|  |
- **artifact_name** | **str**|  |
+ **namespace** | **str**|  | 
+ **name** | **str**|  | 
+ **node_id** | **str**|  | 
+ **artifact_name** | **str**|  | 
 
 ### Return type
 
-**file_type**
+**bytearray**
 
 ### Authorization
 
@@ -333,7 +343,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
@@ -345,7 +354,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_output_artifact_by_uid**
-> file_type get_output_artifact_by_uid(uid, node_id, artifact_name)
+> bytearray get_output_artifact_by_uid(uid, node_id, artifact_name)
 
 Get an output artifact by UID.
 
@@ -355,10 +364,11 @@ Get an output artifact by UID.
 
 ```python
 import time
+import os
 import argo_workflows
-from argo_workflows.api import artifact_service_api
-from argo_workflows.model.grpc_gateway_runtime_error import GrpcGatewayRuntimeError
+from argo_workflows.rest import ApiException
 from pprint import pprint
+
 # Defining the host is optional and defaults to http://localhost:2746
 # See configuration.py for a list of all supported configuration parameters.
 configuration = argo_workflows.Configuration(
@@ -371,7 +381,7 @@ configuration = argo_workflows.Configuration(
 # satisfies your auth use case.
 
 # Configure API key authorization: BearerToken
-configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
+configuration.api_key['BearerToken'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['BearerToken'] = 'Bearer'
@@ -379,32 +389,34 @@ configuration.api_key['BearerToken'] = 'YOUR_API_KEY'
 # Enter a context with an instance of the API client
 with argo_workflows.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = artifact_service_api.ArtifactServiceApi(api_client)
-    uid = "uid_example" # str | 
-    node_id = "nodeId_example" # str | 
-    artifact_name = "artifactName_example" # str | 
+    api_instance = argo_workflows.ArtifactServiceApi(api_client)
+    uid = 'uid_example' # str | 
+    node_id = 'node_id_example' # str | 
+    artifact_name = 'artifact_name_example' # str | 
 
-    # example passing only required values which don't have defaults set
     try:
         # Get an output artifact by UID.
         api_response = api_instance.get_output_artifact_by_uid(uid, node_id, artifact_name)
+        print("The response of ArtifactServiceApi->get_output_artifact_by_uid:\n")
         pprint(api_response)
-    except argo_workflows.ApiException as e:
+    except Exception as e:
         print("Exception when calling ArtifactServiceApi->get_output_artifact_by_uid: %s\n" % e)
 ```
 
 
+
 ### Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **uid** | **str**|  |
- **node_id** | **str**|  |
- **artifact_name** | **str**|  |
+ **uid** | **str**|  | 
+ **node_id** | **str**|  | 
+ **artifact_name** | **str**|  | 
 
 ### Return type
 
-**file_type**
+**bytearray**
 
 ### Authorization
 
@@ -414,7 +426,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
-
 
 ### HTTP response details
 
